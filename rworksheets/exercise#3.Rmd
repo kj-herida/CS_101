@@ -328,7 +328,7 @@ Suppose a classmate stores related data as three separate, unconnected vectors (
 Conclusion
 In 3–4 sentences, summarize the key differences between vectors and lists in R, and explain when you would choose one data structure over the other.
 
-(Your answer here)
+aaaa
 
 
 
