@@ -1,0 +1,187 @@
+---
+title: "Exercise4"
+author: "Kent Jhon Herida"
+date: "2026-11-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Part A — Creating Vectors and List:
+
+```{r}
+#Question #1:
+
+#A factory has a census of its workers. There are 50 workers in total. The following list shows their ages: `34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 43, 53, 41, 51, 35, 24,33, 41, 53, 40, 18, 44, 38, 41, 48, 27, 39, 19, 30, 61, 54, 58, 26, 18.
+
+#Create a vector for the worker’s age.
+
+ages <- c(
+  34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 
+  35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 
+  50, 37, 46, 25, 17, 37, 43, 53, 41, 51, 
+  35, 24, 33, 41, 53, 40, 18, 44, 38, 41, 
+  48, 27, 39, 19, 30, 61, 54, 58, 26, 18
+)
+ages
+
+```
+How many data points?
+50 data points
+
+Find the minimum and the maximum value of worker’s age.
+Minimum age: 17
+
+Maximum age: 61
+
+
+```{r}
+#Access the 13rd to 18th elements and 33th to 35th elements of worker’s Age.
+
+ages[13:18] 
+elements_33_to_35 <- ages[33:35] 
+
+```
+```{r}
+filtered_ages <- ages[-c(10, 20, 30, 40)]
+filtered_ages
+```
+```{r}
+ages[c(4, 14, 24, 44)] <- 0
+ages
+```
+
+```{r}
+
+
+#Question #2:
+
+#R has actually lots of built-in datasets.
+#For example, the rivers data “gives the lengths (in miles) of 141 “major” rivers in North America, as compiled by the US Geological Survey”.
+#Use data(rivers)
+#Get the number of elements (length) in rivers, their sum (sum), mean (mean), median(median), variance(var), standard deviation(sd), minimum (min) and maximum (max).
+
+
+# Compute statistics and store them in a single vector
+river_stats <- c(
+  length = length(rivers),
+  sum    = sum(rivers),
+  mean   = mean(rivers),
+  median = median(rivers),
+  var    = var(rivers),
+  sd     = sd(rivers),
+  min    = min(rivers),
+  max    = max(rivers)
+)
+
+river_stats
+```
+
+
+
+What is the result? The derived result must be in just one(1) vector name.
+ length         sum        mean      median         var          sd         min         max 
+   141.0000  83357.0000    591.1844    425.0000 243908.4086    493.8708    135.0000   3710.0000 
+   
+   
+```{r}
+#Question #3:
+
+#The table below gives the 25 most powerful celebrities and their annual pay as ranked by the editions of Forbes magazine and as listed on the Forbes.com website.
+# 1. Vector of Celebrity Names
+celebrity <- c(
+  "Lady Gaga", "Oprah Winfrey", "Justin Bieber", "U2", "Elton John",
+  "Tiger Woods", "Taylor Swift", "Bon Jovi", "Simon Cowell", "LeBron James",
+  "Angelina Jolie", "Katy Perry", "Johnny Depp", "Kobe Bryant", "Leonardo DiCaprio",
+  "Black Eyed Peas", "Donald Trump", "Dr. Phil McGraw", "Tyler Perry", "Paul McCartney",
+  "Kim Kardashian", "George Lucas", "Simon Fuller", "Kanye West", "Usher"
+)
+
+
+rank <- 1:25
+
+
+pay <- c(
+  90, 290, 53, 195, 100,
+  75, 45, 125, 90, 48,
+  30, 44, 50, 53, 77,
+  61, 60, 80, 130, 67,
+  12, 50, 80, 16, 46
+)
+celebrity
+rank
+pay
+
+
+```
+```{r}
+#Modify the power ranking and pay of J.K. Rowling. Change power ranking to 15 and pay to 90.
+
+# Initial vectors
+celebrity <- c(
+  "Lady Gaga", "Oprah Winfrey", "Justin Bieber", "U2", "Elton John",
+  "Tiger Woods", "Taylor Swift", "Bon Jovi", "Simon Cowell", "LeBron James",
+  "Angelina Jolie", "Katy Perry", "Johnny Depp", "Kobe Bryant", "Leonardo DiCaprio",
+  "Black Eyed Peas", "Donald Trump", "Dr. Phil McGraw", "Tyler Perry", "Paul McCartney",
+  "Kim Kardashian", "George Lucas", "Simon Fuller", "Kanye West", "Usher"
+)
+
+rank <- 1:25
+
+pay <- c(
+  90, 290, 53, 195, 100,
+  75, 45, 125, 90, 48,
+  30, 44, 50, 53, 77,
+  61, 60, 80, 130, 67,
+  12, 50, 80, 16, 46
+)
+
+# Modify 15th position (Power Ranking = 15, Pay = 90)
+celebrity[15] <- "J.K. Rowling"
+pay[15] <- 90
+
+# Print updated vectors
+print(celebrity)
+print(rank)
+print(pay)
+```
+```{r}
+#Question #4:
+
+#Create a list of ten (10) vegetables you ate during your lifetime. If none, just list down the vegetables in your mind.
+
+vegetables <- c("Carrots", "Broccoli", "Spinach", "Tomatoes", "Potatoes", "Cucumbers", "Onions", "Garlic",  "PeppeBellrs", "Cabbage")
+vegetables
+
+
+
+#Add 2 additional vegetables after the last vegetables in the list. What is the result?
+
+vegetables <- c(vegetables, "Eggplant", "Zucchini")
+vegetables
+
+#How many datapoints do you have?
+length(vegetables)
+# Output: [1] 12
+```
+```{r}
+#Add 4 additional vegetables after index 5. What is the result?
+vegetables <- c(
+  "Carrots", "Broccoli", "Spinach", "Tomatoes", "Potatoes",
+  "Cucumbers", "Onions", "Garlic", "Bell Peppers", "Cabbage",
+  "Eggplant", "Zucchini"
+)
+
+
+vegetables <- append(vegetables, c("Cauliflower", "Kale", "Asparagus", "Peas"), after = 5)
+vegetables
+
+
+
+#How many datapoints does your vegetable list have?
+length(vegetables)
+# Output: [1] 16
+```
+

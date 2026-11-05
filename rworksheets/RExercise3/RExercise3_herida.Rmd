@@ -1,7 +1,7 @@
 ---
-title: "exercise#3"
+title: "Exercise#3"
 author: "Kent Jhon Herida"
-date: "2026-11-04"
+date: "2026-11-05"
 output: html_document
 ---
 
@@ -241,11 +241,9 @@ student
 ```
 ```{r}
 # TODO: Access the "grades" element of student using single brackets
-class(student["grades"])
-
+student["grades"]
 # student["grades"] -- then check its type with class()
-class(student[["grades"]])
-
+class(student["grades"])
 
 ```
 ```{r}
@@ -328,7 +326,7 @@ Suppose a classmate stores related data as three separate, unconnected vectors (
 Conclusion
 In 3–4 sentences, summarize the key differences between vectors and lists in R, and explain when you would choose one data structure over the other.
 
-aaaa
+
 
 
 
