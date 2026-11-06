@@ -1,0 +1,138 @@
+---
+title: "RExercise#9"
+author: "Kent Jhon Herida"
+date: "2026-11-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Part A — Creating Data Frames
+
+```{r}
+#The table below shows the data about shoe size and height. Create a data frame. Save it as shoesize.csv
+shoe_size <- c(
+  6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5,
+  13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0
+)
+
+height <- c(
+  66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.5, 67.0, 71.0, 71.0,
+  77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0
+)
+
+gender <- c(
+  "F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M",
+  "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M"
+)
+
+shoesize <- data.frame(
+  Shoe_size = shoe_size,
+  Height = height,
+  Gender = gender
+)
+
+shoe_size
+height 
+gender
+write.csv(shoesize, "shoesize.csv", row.names = FALSE)
+```
+
+```{r}
+#Then try to import the saved csv into the R environment. Display the last 5 rows.
+shoesize <- read.csv("shoesize.csv")
+tail(shoesize, 5)
+```
+
+```{r}
+#Describe the data by showing the structures and its content.
+str(shoesize)
+shoesize
+```
+
+```{r}
+#Inspect its dimensions. How many rows? How about columns?
+dim(shoesize)
+```
+
+```{r}
+#Inspect by using summary(). What is the difference of the summary() from str() function?
+summary(shoesize)
+```
+```{r}
+#Create a subset by males and females with their corresponding shoe size and height. What its result? Show the R scripts.
+female_subset <- subset(shoesize, Gender == "F")
+male_subset   <- subset(shoesize, Gender == "M")
+
+female_subset
+male_subset
+
+```
+
+```{r}
+#Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
+mean_shoe_size <- mean(shoesize$Shoe_size)
+mean_height    <- mean(shoesize$Height)
+
+mean_shoe_size
+mean_height
+```
+
+Is there a relationship between shoe size and height? Why?
+(Taller individuals generally have larger foot surface areas to maintain physical stability and balance.)
+
+```{r}
+#Question #2:
+
+#A nominal variable is a categorical variable without an implied order. This means that it is impossible to say that ‘one is worth more than the other’.
+#reate factors for the gender.
+shoesize$Gender <- factor(shoesize$Gender)
+str(shoesize$Gender)
+```
+
+Question #3:
+
+When R Markdown knits a document, it uses the folder containing the .Rmd file as the working directory — NOT whatever folder your R console happened to be in beforehand. Why do you think this design choice makes an .Rmd file’s imports more reliable and reproducible when shared with someone else?
+
+(Using standard relative file paths ensures that an R Markdown document remains fully reproducible and self-contained when shared across different machines. By automatically treating the folder containing the .Rmd file as the active working directory, R eliminates hardcoded system paths and prevents broken file imports caused by fluctuating console settings. Consequently, collaborators can clone or move the project folder to any computer and reliably execute the code without having to manually reconfigure their file paths.)
+
+
+Question #4:
+
+Run str(shoes) and note the type R assigned to the Gender column. Is it what you expected? Explain what could go wrong in later analysis if a column you expected to be numeric (like ShoeSize) was accidentally imported as text (character) instead — for example, because of a stray non-numeric value in the original file.
+
+(it wont run because the name of the object is shoe_size.)
+
+
+Question #5:
+
+Why is it good practice to check BOTH head(shoes) and tail(shoes) after importing a file, instead of just head()? What kind of import problem would head() alone fail to catch?
+
+(Reviewing both head() and tail() ensures complete data integrity by catching hidden footer notes, summary rows, or trailing formatting errors that appear only at the bottom of a file. While head() confirms that the top rows and column headers imported correctly, it leaves the rest of the dataset uninspected. Checking the tail allows you to spot corrupted or truncated imports, accidental blank rows, or misaligned columns caused by stray commas, preventing subtle errors from silently breaking your downstream analysis.)
+
+```{r}
+#Question #6:
+
+#Compute for the correlation
+# TODO: Use cor(shoes$ShoeSize, shoes$Height) to compute the correlation
+# between shoe size and height across ALL observations
+cor(shoesize$Shoe_size, shoesize$Height)
+```
+
+```{r}
+# TODO: Return all rows where ShoeSize is greater than or equal to 11,
+# regardless of gender
+subset(shoesize, Shoe_size >= 11)
+```
+
+```{r}
+#Question #7:
+
+#Compare the mean height and mean shoe size between the female and male subsets. Describe the pattern you see.
+#Does this dataset support the idea that shoe size and height are related WITHIN each gender group, or could gender itself be an important factor you’d need to account for separately when studying that relationship?
+aggregate(cbind(Shoe_size, Height) ~ Gender, data = shoesize, FUN = mean)
+by(shoesize, shoesize$Gender, function(df) cor(df$Shoe_size, df$Height))
+```
+
