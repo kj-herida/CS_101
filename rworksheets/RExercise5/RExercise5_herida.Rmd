@@ -212,3 +212,5 @@ ans. To combine all 5 class matrices, pass them together into a single rbind() c
 In 3–4 sentences, summarize the key differences between a matrix and an array, and describe a situation where cbind()/rbind() would be useful in a real dataset you might work with.
 
 ans. A matrix is a two-dimensional rectangular grid defined strictly by rows and columns, whereas an array is a multi-dimensional structure that expands upon matrices by adding a third dimension (or more) through stacked layers. While both store data of a single atomic type, matrices are ideal for simple flat tables, whereas arrays are required when tracking data across an extra variable like time or categories. In a real-world scenario like tracking daily inventory across multiple retail branches, rbind() would be essential to continuously append each day's new stock numbers as rows, while cbind() would allow you to add new calculated metrics, like reorder status or total profit margins, as extra columns.
+
+...
