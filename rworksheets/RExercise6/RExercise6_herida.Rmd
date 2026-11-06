@@ -78,7 +78,7 @@ ans. A column is an atomic vector: Vectors can only hold one data type (e.g., al
 # students["age"]  -- note: compare the output/class of this one to the others
 class(students$age)      
 class(students[["age"]])  
-class(students["age"])    
+class(students["age"])  
 ```
 
 ```{r}
