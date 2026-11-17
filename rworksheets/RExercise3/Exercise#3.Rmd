@@ -23,9 +23,247 @@ scores
 # TODO: Use seq() to create a vector called odds containing odd numbers
 # from 1 to 19 (hint: use the "by" argument)
 
+seq (1, 19, by = 2)
+```
+
+
+```{r}
 # TODO: Use seq() with length.out to create a vector of exactly 5 evenly spaced numbers between 0 and 1
 
-seq(1, 19,by = 2)
-seq(from =0, to 1, length.out)
+seq(1, 19, length = 2)
+seq(0, 1, length = 5)
+```
+
+
+```{r}
+# TODO: Use rep() to create a vector that repeats the value "A" 4 times
+rep("A", 4)
+```
+
+
+```{r}
+# TODO: Use rep() with the "each" argument to turn c("A", "B") into
+# "A" "A" "B" "B" (each element repeated twice, in order)
+
+rep(c("A", "B"), each = 2)
+```
+
+
+```{r}
+# TODO: Use rep() with the "times" argument to turn c("A", "B") into
+# "A" "B" "A" "B" (the whole sequence repeated twice)
+rep(c("A", "B"), times = 2)
+```
+Question #1:
+
+Set up a vector named age, consisting of 15, 28, 32, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 12, 42, 53, 41, 51, 35, 24, 33, 8.
+```{r}
+new_age  <- c(age, 0, age)
+new_age
+```
+
+
+
+
+
+
+How many data points?
+(Your answer here)
+
+
+
+Find the reciprocal of age?
+(Your answer here)
+
+
+
+Assign also new_age <- c(age, 0, age). What happens to new_age?
+(Your answer here)
+
+
+
+d: Find the minimum and the maximum value of age.
+
+(Your answer here)
+
+
+
+Question #2:
+
+rep(c("A","B"), each = 2) and rep(c("A","B"), times = 2) both produce a vector of length 4, but with different element orders.
+Explain in your own words the difference between each and times.
+(Your answer here)
+
+
+
+Question #3:
+
+Compare seq(1, 20, by = 2) with seq(1, 20, length.out = 5). What does each argument (by vs length.out) control, and when would you use one over the other in a real analysis?
+(Your answer here)
+
+
+
+Question #4:
+
+Generate a sequence for 20 to 60. Name the vector as vec_num
+(Your answer here)
+
+
+
+Get the mean for vec_num.
+(Your answer here)
+
+
+
+Get the sum for vec_num.
+(Your answer here)
+
+
+
+d: How many data points are there in vec_num?
+
+(Your answer here)
+
+
+###Part B — Subsetting (Accessing) Vectors
+
+```{r}
+grades <- c(88, 92, 79, 95, 84)
+names(grades) <- c("Math", "Science", "English", "History", "PE")
+
+
+# TODO: Access the 3rd element of grades using positional indexing
+grades [3]
+# TODO: Access the 1st and 4th element of grades using positional indexing
+grades[c(1, 4)]
+
+# TODO: Access "Science" and "PE" together using their names
+
+grades[c("Science", "PE")]
+
+
+```
+```{r}
+# TODO: Return all elements of grades EXCEPT the 1st and 4th, using
+# negative indexing, e.g. grades[-c(...)]
+
+grades[-c(1, 4)]
+```
+```{r}
+# TODO: Use a logical condition to return only the grades that are
+# greater than or equal to 85 (hint: grades[grades >= 85])
+
+grades [ grades >= 85]
+```
+Question #5:
+
+Negative indexing (grades[-1]) removes an element, while logical indexing (grades[grades >= 85]) filters by a condition.
+
+Describe a real situation where you would need negative indexing, and a different situation where logical indexing would be the better tool.
+
+(Your answer here)
+
+
+
+Question #6:
+
+What happens if you run grades[10] (an index that doesn’t exist)? Run it, observe the result, and explain why R responds this way instead of throwing an error.
+(Your answer here)
+
+
+Question #7:
+
+Print a vector with the integers between 1 and 100 that are not divisible by 3, 5 and 7 using filter option.
+  Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+  Write the R code and its output.
+  
+###Part C — Vector Operations and append()
+```{r}
+x <- c(1, 2, 3, 4)
+y <- c(10, 20, 30, 40)
+
+# TODO: Add x and y element-wise, and print the result
+x + y
+# TODO: Multiply every element of x by 2
+x * 2
+```
+```{r}
+z <- c(1, 2, 3, 4, 5, 6)
+short <- c(1, 0)
+
+# TODO: Add z and short together and print the result. Run this even
+z + short
+
+# though the vectors are different lengths -- observe what R does.
+
+```
+```{r}
+fruits <- c("apple", "banana", "cherry")
+
+# TODO: Use append() to add "date" to the end of fruits
+
+append(fruits, "date")
+
+# TODO: Use append() with the "after" argument to insert "kiwi" between
+# "apple" and "banana" (i.e., after position 1)
+append (fruits, "kiwi", after = 1)
+```
+Question #8:
+
+In the vectors-recycling chunk, z has 6 elements and short has only 2. R still produced an answer instead of an error.
+
+Explain, in your own words, what R’s “recycling rule” did to short to make the addition work.
+
+(Your answer here)
+
+
+
+Question #9: Now try adding z (length 6) to c(1, 0, 1) (length 3) instead. Does it work cleanly?
+
+(Your answer here)
+
+
+
+Then try adding z to c(1, 0, 1, 1) (length 4). Compare the warning (or lack of one) in each case, and explain what condition determines whether R recycles silently versus with a warning.
+(Your answer here)
+
+###Part D — Lists: Creating and Subsetting
+
+```{r}
+# TODO: Create a list called student with these named elements:
+# name = "Maria Santos", age = 20, grades = c(88, 92, 79),
+# is_enrolled = TRUE
+
+student <- list(
+  name = "Maria Santos",
+  age = 20,
+  grades = c(88, 92, 79),
+  is_enrolled = TRUE
+  
+)
+student
+```
+
+
+
+
+```{r}
+# TODO: Access the "grades" element of student using single brackets
+# student["grades"] -- then check its type with class()
+student["grades"]
+class(student["grades"])
+
+```
+```{r}
+# TODO: Access the "grades" element of student using double brackets
+# student[["grades"]] -- then check its type with class()
+
+student [["grades"]]
+class(student["grades"])
+```
+```{r}
+# TODO: Access the "name" element of student using the $ operator
+# student$name
+student$name
 ```
 
