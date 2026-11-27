@@ -2,7 +2,9 @@
 title: "RExercise#7"
 author: "Kent Jhon Herida"
 date: "2026-11-06"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

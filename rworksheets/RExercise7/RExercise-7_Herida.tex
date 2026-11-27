@@ -1,0 +1,652 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={RExercise\#7},
+  pdfauthor={Kent Jhon Herida},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{RExercise\#7}
+\author{Kent Jhon Herida}
+\date{2026-11-06}
+
+\begin{document}
+\maketitle
+
+\#\#\#Part A --- Creating Data Frames
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{respondents }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{20}
+\NormalTok{sex }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{fathers\_occ }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{persons\_home }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{6}\NormalTok{)}
+\NormalTok{siblings\_school }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{house\_type }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+
+\NormalTok{respondents}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sex}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 2 2 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 1 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fathers\_occ}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 3 3 3 1 2 3 1 1 1 3 2 1 3 3 1 3 1 2 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{persons\_home}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  5  7  3  8  5  9  6  7  8  4  7  5  4  7  8  8  3 11  7  6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{siblings\_school}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 6 4 4 1 2 1 5 3 1 2 3 2 5 5 2 1 2 5 3 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{house\_type}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 2 3 1 1 3 3 1 2 3 2 3 2 2 3 3 3 3 3 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# }\AlertTok{TODO}\CommentTok{: Before combining these into a data frame, confirm all six vectors}
+\FunctionTok{length}\NormalTok{(respondents)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(fathers\_occ)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(persons\_home)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(siblings\_school)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(house\_type)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# have the same length using length() on each one (or wrap them in c()}
+\CommentTok{\# and check for yourself that every value is 20)}
+
+\FunctionTok{c}\NormalTok{(}
+  \FunctionTok{length}\NormalTok{(respondents), }
+  \FunctionTok{length}\NormalTok{(sex), }
+  \FunctionTok{length}\NormalTok{(fathers\_occ), }
+  \FunctionTok{length}\NormalTok{(persons\_home), }
+  \FunctionTok{length}\NormalTok{(siblings\_school), }
+  \FunctionTok{length}\NormalTok{(house\_type)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20 20 20 20 20 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# }\AlertTok{TODO}\CommentTok{: Combine all six vectors into a data frame called survey using}
+\CommentTok{\# data.frame(), naming the columns: Respondent, Sex, FathersOccupation,}
+\CommentTok{\# PersonsAtHome, SiblingsAtSchool, TypesOfHouses}
+\CommentTok{\# Print the resulting data frame}
+\NormalTok{survey }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Respondent =}\NormalTok{ respondents,}
+  \AttributeTok{Sex =}\NormalTok{ sex,}
+  \AttributeTok{FathersOccupation =}\NormalTok{ fathers\_occ,}
+  \AttributeTok{PersonsAtHome =}\NormalTok{ persons\_home,}
+  \AttributeTok{SiblingsAtSchool =}\NormalTok{ siblings\_school,}
+  \AttributeTok{TypesOfHouses =}\NormalTok{ house\_type}
+\NormalTok{)}
+\NormalTok{survey}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Respondent Sex FathersOccupation PersonsAtHome SiblingsAtSchool
+## 1           1   2                 1             5                6
+## 2           2   2                 3             7                4
+## 3           3   1                 3             3                4
+## 4           4   2                 3             8                1
+## 5           5   2                 1             5                2
+## 6           6   2                 2             9                1
+## 7           7   2                 3             6                5
+## 8           8   2                 1             7                3
+## 9           9   2                 1             8                1
+## 10         10   2                 1             4                2
+## 11         11   1                 3             7                3
+## 12         12   2                 2             5                2
+## 13         13   2                 1             4                5
+## 14         14   2                 3             7                5
+## 15         15   2                 3             8                2
+## 16         16   2                 1             8                1
+## 17         17   2                 3             3                2
+## 18         18   2                 1            11                5
+## 19         19   1                 2             7                3
+## 20         20   2                 1             6                2
+##    TypesOfHouses
+## 1              1
+## 2              2
+## 3              3
+## 4              1
+## 5              1
+## 6              3
+## 7              3
+## 8              1
+## 9              2
+## 10             3
+## 11             2
+## 12             3
+## 13             2
+## 14             2
+## 15             3
+## 16             3
+## 17             3
+## 18             3
+## 19             3
+## 20             2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Describe the data. Get the structure or the summary of the data.}
+\FunctionTok{str}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    20 obs. of  6 variables:
+##  $ Respondent       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Sex              : num  2 2 1 2 2 2 2 2 2 2 ...
+##  $ FathersOccupation: num  1 3 3 3 1 2 3 1 1 1 ...
+##  $ PersonsAtHome    : num  5 7 3 8 5 9 6 7 8 4 ...
+##  $ SiblingsAtSchool : num  6 4 4 1 2 1 5 3 1 2 ...
+##  $ TypesOfHouses    : num  1 2 3 1 1 3 3 1 2 3 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Respondent         Sex       FathersOccupation PersonsAtHome 
+##  Min.   : 1.00   Min.   :1.00   Min.   :1.00      Min.   : 3.0  
+##  1st Qu.: 5.75   1st Qu.:2.00   1st Qu.:1.00      1st Qu.: 5.0  
+##  Median :10.50   Median :2.00   Median :2.00      Median : 7.0  
+##  Mean   :10.50   Mean   :1.85   Mean   :1.95      Mean   : 6.4  
+##  3rd Qu.:15.25   3rd Qu.:2.00   3rd Qu.:3.00      3rd Qu.: 8.0  
+##  Max.   :20.00   Max.   :2.00   Max.   :3.00      Max.   :11.0  
+##  SiblingsAtSchool TypesOfHouses
+##  Min.   :1.00     Min.   :1.0  
+##  1st Qu.:2.00     1st Qu.:2.0  
+##  Median :2.50     Median :2.5  
+##  Mean   :2.95     Mean   :2.3  
+##  3rd Qu.:4.25     3rd Qu.:3.0  
+##  Max.   :6.00     Max.   :3.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Check for the dimensions. How many rows and columns?}
+\FunctionTok{dim}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20  6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ncol}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Create factors for Sex, Father\textquotesingle{}s Occupation and Types of Houses}
+\NormalTok{survey }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Respondent =}\NormalTok{ respondents,}
+  \AttributeTok{Sex =}\NormalTok{ sex,}
+  \AttributeTok{FathersOccupation =}\NormalTok{ fathers\_occ,}
+  \AttributeTok{PersonsAtHome =}\NormalTok{ persons\_home,}
+  \AttributeTok{SiblingsAtSchool =}\NormalTok{ siblings\_school,}
+  \AttributeTok{TypesOfHouses =}\NormalTok{ house\_type}
+\NormalTok{)}
+
+\NormalTok{survey}\SpecialCharTok{$}\NormalTok{Sex }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}
+\NormalTok{  survey}\SpecialCharTok{$}\NormalTok{Sex,}
+  \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{, }\StringTok{"Female"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{survey}\SpecialCharTok{$}\NormalTok{FathersOccupation }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}
+\NormalTok{  survey}\SpecialCharTok{$}\NormalTok{FathersOccupation,}
+  \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Farmer"}\NormalTok{, }\StringTok{"Driver"}\NormalTok{, }\StringTok{"Others"}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{survey}\SpecialCharTok{$}\NormalTok{TypesOfHouses }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(}
+\NormalTok{  survey}\SpecialCharTok{$}\NormalTok{TypesOfHouses,}
+  \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Wood"}\NormalTok{, }\StringTok{"Semi{-}Concrete"}\NormalTok{, }\StringTok{"Concrete"}\NormalTok{)}
+\NormalTok{)}
+\FunctionTok{str}\NormalTok{(survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    20 obs. of  6 variables:
+##  $ Respondent       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Sex              : Factor w/ 2 levels "Male","Female": 2 2 1 2 2 2 2 2 2 2 ...
+##  $ FathersOccupation: Factor w/ 3 levels "Farmer","Driver",..: 1 3 3 3 1 2 3 1 1 1 ...
+##  $ PersonsAtHome    : num  5 7 3 8 5 9 6 7 8 4 ...
+##  $ SiblingsAtSchool : num  6 4 4 1 2 1 5 3 1 2 ...
+##  $ TypesOfHouses    : Factor w/ 3 levels "Wood","Semi-Concrete",..: 1 2 3 1 1 3 3 1 2 3 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{survey}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Respondent    Sex FathersOccupation PersonsAtHome SiblingsAtSchool
+## 1           1 Female            Farmer             5                6
+## 2           2 Female            Others             7                4
+## 3           3   Male            Others             3                4
+## 4           4 Female            Others             8                1
+## 5           5 Female            Farmer             5                2
+## 6           6 Female            Driver             9                1
+## 7           7 Female            Others             6                5
+## 8           8 Female            Farmer             7                3
+## 9           9 Female            Farmer             8                1
+## 10         10 Female            Farmer             4                2
+## 11         11   Male            Others             7                3
+## 12         12 Female            Driver             5                2
+## 13         13 Female            Farmer             4                5
+## 14         14 Female            Others             7                5
+## 15         15 Female            Others             8                2
+## 16         16 Female            Farmer             8                1
+## 17         17 Female            Others             3                2
+## 18         18 Female            Farmer            11                5
+## 19         19   Male            Driver             7                3
+## 20         20 Female            Farmer             6                2
+##    TypesOfHouses
+## 1           Wood
+## 2  Semi-Concrete
+## 3       Concrete
+## 4           Wood
+## 5           Wood
+## 6       Concrete
+## 7       Concrete
+## 8           Wood
+## 9  Semi-Concrete
+## 10      Concrete
+## 11 Semi-Concrete
+## 12      Concrete
+## 13 Semi-Concrete
+## 14 Semi-Concrete
+## 15      Concrete
+## 16      Concrete
+## 17      Concrete
+## 18      Concrete
+## 19      Concrete
+## 20 Semi-Concrete
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Get the mean for all columns.}
+\FunctionTok{colMeans}\NormalTok{(survey[}\FunctionTok{sapply}\NormalTok{(survey, is.numeric)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Respondent    PersonsAtHome SiblingsAtSchool 
+##            10.50             6.40             2.95
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Extract the 1st five rows and then all the columns using subsetting functions. What is the output?}
+\NormalTok{survey[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Respondent    Sex FathersOccupation PersonsAtHome SiblingsAtSchool
+## 1          1 Female            Farmer             5                6
+## 2          2 Female            Others             7                4
+## 3          3   Male            Others             3                4
+## 4          4 Female            Others             8                1
+## 5          5 Female            Farmer             5                2
+##   TypesOfHouses
+## 1          Wood
+## 2 Semi-Concrete
+## 3      Concrete
+## 4          Wood
+## 5          Wood
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Select the variable types of houses then store the vector that results as types\_houses.}
+\NormalTok{types\_houses }\OtherTok{\textless{}{-}}\NormalTok{ survey}\SpecialCharTok{$}\NormalTok{TypesOfHouses}
+\NormalTok{types\_houses}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] Wood          Semi-Concrete Concrete      Wood          Wood         
+##  [6] Concrete      Concrete      Wood          Semi-Concrete Concrete     
+## [11] Semi-Concrete Concrete      Semi-Concrete Semi-Concrete Concrete     
+## [16] Concrete      Concrete      Concrete      Concrete      Semi-Concrete
+## Levels: Wood Semi-Concrete Concrete
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Select only all Males respondent that their father occupation was farmer.}
+\NormalTok{farmer\_males }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(survey, Sex }\SpecialCharTok{==} \StringTok{"Male"} \SpecialCharTok{\&}\NormalTok{ FathersOccupation }\SpecialCharTok{==} \StringTok{"Farmer"}\NormalTok{)}
+\NormalTok{farmer\_males}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] Respondent        Sex               FathersOccupation PersonsAtHome    
+## [5] SiblingsAtSchool  TypesOfHouses    
+## <0 rows> (or 0-length row.names)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Select only all females respondent that have greater than or equal to 5 number of siblings attending school.}
+\NormalTok{female\_many\_siblings }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(survey, Sex }\SpecialCharTok{==} \StringTok{"Female"} \SpecialCharTok{\&}\NormalTok{ SiblingsAtSchool }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{)}
+\NormalTok{female\_many\_siblings}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Respondent    Sex FathersOccupation PersonsAtHome SiblingsAtSchool
+## 1           1 Female            Farmer             5                6
+## 7           7 Female            Others             6                5
+## 13         13 Female            Farmer             4                5
+## 14         14 Female            Others             7                5
+## 18         18 Female            Farmer            11                5
+##    TypesOfHouses
+## 1           Wood
+## 7       Concrete
+## 13 Semi-Concrete
+## 14 Semi-Concrete
+## 18      Concrete
+\end{verbatim}
+
+Question \#2: Before running data.frame(), you were asked to check that
+all six vectors had the same length. Why is this check necessary
+specifically for survey data like this, where every column represents an
+answer from the SAME 20 respondents?
+
+ans. Checking vector lengths ensures row-by-row data alignment across
+respondents and prevents R from recycling shorter vectors or throwing
+errors during data frame creation.
+
+Question \#4:
+
+In subset-logical, if you filter on Sex == 1 using the raw numeric code
+rather than the word ``Male''.
+
+Looking at the result, how could someone unfamiliar with the legend
+misinterpret this output?
+
+What problem does this illustrate about working with coded data before
+it has been labeled?
+
+(Filtering by raw numeric code 1 leaves the output showing only numbers,
+which an unfamiliar reader could easily misinterpret as Female or
+another category since the real-world meaning is missing, illustrating
+how unlabeled coded data creates ambiguity and human error without clear
+legend documentation.)
+
+Question \#5:
+
+Out of 20 respondents, how many are Male (Sex == 1)? Compute this using
+nrow() on your filtered result from subset-logical or sum(survey\$Sex ==
+1). Does this small sample size change how confident you would be
+generalizing any pattern you find in this dataset to a larger
+population? Explain your reasoning. (There are 3 Male respondents out of
+the 20 total respondents.
+
+Having only 3 males out of 20 total respondents significantly lowers
+confidence in generalizing any pattern to a larger population because a
+sample size that small lacks statistical power and introduces high
+sampling variability. A tiny sample is easily distorted by individual
+outliers and fails to represent the diversity of the broader population,
+making any observed trends likely the result of random chance rather
+than true societal patterns.)
+
+Question \#6:
+
+Run summary(). Every column shows numeric summary statistics (min, mean,
+max, etc.) -- including Sex and TypesOfHouses, which are really
+categories, not quantities.
+
+Explain why R doesn't know, by itself, that these columns are
+categorical, and what this tells you about the difference between how
+data is stored versus what it means.
+
+(R evaluates Sex and TypesOfHouses as numeric data because it only
+tracks how the values are stored in memory, illustrating that computers
+track raw storage types while analysts must explicitly define their
+real-world categorical meaning.)
+
+Question \#7:
+
+Compare the mean of PersonsAtHome to the mean of Sex in your summary
+output. Which of these two means is actually meaningful to report to
+someone, and which one is not? Justify your answer.
+
+(The mean of PersonsAtHome is meaningful because it measures a
+quantitative count of household members, whereas the mean of Sex is
+meaningless because numeric codes for categories are arbitrary labels
+rather than measurable quantities.)
+
+\end{document}
